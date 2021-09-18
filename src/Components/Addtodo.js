@@ -1,9 +1,12 @@
 import React from 'react'
-import { Badge, Button, HStack, Input, VStack } from '@chakra-ui/react'
+import { Badge, Box, Button, HStack, Input, VStack } from '@chakra-ui/react'
 import Todos from './Todos'
 import { useState } from 'react'
 
 function Addtodo() {
+    //date
+    var today = new Date(),
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     const [value, setValue] = useState("")
     const handleSubmit = e => {
         e.preventDefault();
@@ -29,13 +32,14 @@ function Addtodo() {
     const removetodo = ((index) => {
         const newTodos = [...todolist];
         newTodos.splice(index, 1);
-        if (newTodos.length === 0)
-            console.log("empty")
         settodolist(newTodos);
     })
-    const empty = todolist.length === 0 ? true : false;
+    const empty = todolist.length === 0 ? true : false; //displaying no todos badge condition
     return (
         <VStack width="100%" spacing="24px">
+            <HStack justifyContent="left" width={["90%", "70%", "50%"]}>
+            <Box color="white">{date}</Box>
+            </HStack>
             {/* Add todo section */}
             <HStack justify="center" width={["90%", "70%", "50%"]}>
                 <Input variant="filled" placeholder="Write your task..." value={value} color="white" onChange={e => setValue(e.target.value)} />
